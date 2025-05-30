@@ -1,7 +1,7 @@
 from enum import Enum
 
 class TextType(Enum):
-    NORMAL = "normal"
+    TEXT = "text"
     BOLD = "bold"
     ITALIC = "italic"
     CODE = "code"
@@ -21,7 +21,7 @@ class TextNode:
     
     def __repr__(self):
         match self.text_type:
-            case TextType.NORMAL:
+            case TextType.TEXT:
                 return f"TextNode({self.text}, {self.text_type.value})"
             case TextType.BOLD:
                 return f"TextNode(**{self.text}**, {self.text_type.value})"
