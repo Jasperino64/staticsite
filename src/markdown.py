@@ -91,3 +91,8 @@ def text_to_textnodes(text):
     new_nodes = split_nodes_image(new_nodes)
     new_nodes = split_nodes_link(new_nodes)
     return new_nodes
+
+def markdown_to_blocks(markdown):
+    blocks = markdown.split("\n\n")
+    blocks = [block.strip() for block in blocks if block.strip()]
+    return blocks
