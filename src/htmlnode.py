@@ -5,7 +5,7 @@ class HTMLNode:
         self.value = value
         self.children = children
         self.props = props
-        if not value and not children:
+        if value is None and (children is None or len(children) == 0):
             raise ValueError("HTMLNode must have either a value or children")
         
     def to_html(self):
@@ -69,7 +69,7 @@ def text_node_to_html_node(text_node):
         case TextType.IMAGE:
             if not text_node.url:
                 raise ValueError("URL must be provided for image text type")
-            return LeafNode(tag="img", value=None, props={"src": text_node.url, "alt": text_node.text})
+            return LeafNode(tag="img", value="", props={"src": text_node.url, "alt": text_node.text})
         case _:
             raise ValueError(f"Unknown text type: {text_node.type}")
         

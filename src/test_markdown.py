@@ -1,10 +1,11 @@
 import unittest
 from textnode import TextNode, TextType
-from markdown import split_nodes_delimiter,\
-    split_nodes_image,\
-    split_nodes_link,\
-    text_to_textnodes,\
-    markdown_to_blocks
+from markdown import (split_nodes_delimiter,
+    split_nodes_image,
+    split_nodes_link,
+    text_to_textnodes,
+    markdown_to_blocks,
+    extract_title)
 
 class TestMarkdown(unittest.TestCase):
     def test_bold_split(self):
@@ -172,3 +173,17 @@ This is the same paragraph on a new line
                     "- This is a list\n- with items",
                 ],
             )
+
+    def test_extract_title(self):
+        md = """
+# This is a title
+"""
+        title = extract_title(md)
+        self.assertEqual(title, "This is a title")
+    def test_extract_title_no_title(self):
+        md = """
+This is a paragraph without a title.
+"""
+        with self.assertRaises(ValueError):
+            title = extract_title(md)
+        

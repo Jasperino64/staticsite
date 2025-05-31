@@ -96,3 +96,16 @@ def markdown_to_blocks(markdown):
     blocks = markdown.split("\n\n")
     blocks = [block.strip() for block in blocks if block.strip()]
     return blocks
+
+def extract_title(markdown):
+    """
+    Extract the title from the markdown content.
+    The title is assumed to be the first heading in the markdown.
+    """
+    blocks = markdown_to_blocks(markdown)
+    for block in blocks:
+        if block.startswith("# "):
+            return block[2:].strip()  # Remove the leading '# ' and any whitespace
+        
+    raise ValueError("No title found in markdown content")
+    

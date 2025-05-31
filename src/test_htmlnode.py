@@ -39,3 +39,10 @@ class TestTextNodeToHTMLNode(unittest.TestCase):
         self.assertEqual(html_node.tag, 'b')
         self.assertEqual(html_node.value, 'Bold Text')
         self.assertEqual(html_node.to_html(), '<b>Bold Text</b>')
+
+    def test_img_node_to_html_node(self):
+        text_node = TextNode("image", TextType.IMAGE, url="image.png")
+        html_node = text_node_to_html_node(text_node)
+        self.assertIsInstance(html_node, LeafNode)
+        self.assertEqual(html_node.tag, 'img')
+        self.assertEqual(html_node.props, {'alt': 'image', 'src': 'image.png'})
